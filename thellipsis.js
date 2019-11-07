@@ -1,48 +1,73 @@
-function getWidth(pre_space, str, post_space, append_elem) {
-  var pre = pre_space ? "&nbsp;" : "";
-  var post = post_space ? "&nbsp;" : "";
+function createStyledWhiteSpaceNoWrapSpan(content) {
+  const tempSpanElement = document.createElement("span");
 
-  var tmp_div = $(
-    '<span style="white-space: nowrap;">' + pre + str + post + "</span>"
+  tempSpanElement.style.whiteSpace = "nowrap";
+  tempSpanElement.className = "temp";
+  tempSpanElement.innerHTML = content;
+
+  return tempSpanElement;
+}
+
+function getContentWidth(pre_space, contentString, appendElement) {
+  const pre = pre_space ? "&nbsp;" : "";
+  const tempSpanElement = createStyledWhiteSpaceNoWrapSpan(
+    `${pre}${contentString}`
   );
-  append_elem.append(tmp_div);
-  var width = tmp_div[0].offsetWidth;
-  tmp_div.remove();
+
+  appendElement.appendChild(tempSpanElement);
+
+  const width = tempSpanElement.offsetWidth;
+
+  appendElement.removeChild(tempSpanElement);
+
   return width;
 }
 
-function ellipsisLine(elem, linePosition) {
-  var width = elem[0].offsetWidth;
-  var foundOriginalText = elem[0].dataset.thellipsisOriginalText !== undefined;
-  var text;
+function debugging(on, values) {
+  if (on) {
+    console.log("=====================");
+    console.log("current_line: ", values.current_line);
+    console.log("word: ", values.word);
+    console.log("line_width: ", values.line_width);
+    console.log("width: ", values.width);
+    console.log("line_width / width: ", values.line_width / values.width);
+    console.log("line_width >= width: ", values.line_width >= values.width);
+    console.log("=====================");
+  }
+}
 
-  if (foundOriginalText) text = elem[0].dataset.thellipsisOriginalText;
-  else text = elem[0].innerText;
+function detectOriginalTextAsDataAttribute(element) {
+  return element.dataset.thellipsisOriginalText !== undefined;
+}
 
-  var words = text.split(" ");
-  var line_width = 0;
-  var current_line = "";
-  var lines = [];
+function getOriginalText(element) {
+  if (detectOriginalTextAsDataAttribute(element))
+    return element.dataset.thellipsisOriginalText;
+  else return element.innerText;
+}
+
+function thellipsis(element, line_position, debug) {
+  const line_index = line_position - 1;
+  const width = element.offsetWidth;
+  const text = getOriginalText(element);
+  const words = text.split(" ");
+  let line_width = 0;
+  let current_line = "";
+  let lines = [];
 
   words.map(function(word, index) {
     if (line_width == 0) {
-      line_width += getWidth(false, word, false, elem);
+      line_width += getContentWidth(false, word, element);
     } else {
-      line_width += getWidth(true, word, false, elem);
+      line_width += getContentWidth(true, word, element);
     }
 
-    // console.log("=====================");
-    // console.log("current_line: ", current_line);
-    // console.log("word: ", word);
-    // console.log("line_width: ", line_width);
-    // console.log("width: ", width);
-    // console.log("line_width / width: ", line_width / width);
-    // console.log("line_width >= width: ", line_width >= width);
-    // console.log("=====================");
+    debugging(debug, { line_width, current_line, word, width });
+
     if (line_width >= width) {
       lines.push(current_line);
 
-      line_width = getWidth(false, word, false, elem); // new line
+      line_width = getContentWidth(false, word, element); // new line
       current_line = "";
     }
     current_line += (current_line != "" ? " " : "") + word;
@@ -53,10 +78,9 @@ function ellipsisLine(elem, linePosition) {
     }
   });
 
-  var line_index = linePosition - 1;
-  var end_index = lines.length - 1;
+  const end_index = lines.length - 1;
 
-  if (lines.length > linePosition) {
+  if (lines.length > line_position) {
     lines[line_index] =
       '<span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: ' +
       parseInt(width) +
@@ -65,7 +89,8 @@ function ellipsisLine(elem, linePosition) {
     lines[end_index] += "</span>";
   }
 
-  if (!foundOriginalText) elem[0].dataset.thellipsisOriginalText = text;
+  if (!detectOriginalTextAsDataAttribute(element))
+    element.dataset.thellipsisOriginalText = text;
 
-  elem[0].innerHTML = lines.join(" ");
+  element.innerHTML = lines.join(" ");
 }

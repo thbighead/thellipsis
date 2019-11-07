@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Text Ellipsis Challenge</title>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
-        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script src="thellipsis.js"></script>
     <script>
-        $(document).ready(function () {
-            $(window).on('resize', function () {
-                $('.should-ellipsis').each(function () {
-                    ellipsisLine($(this), 3);
+        document.addEventListener("DOMContentLoaded", function () {
+            const elementsThatShouldEllipsis = document.getElementsByClassName('thellipsis');
+
+            window.onresize = function () {
+                Array.prototype.forEach.call(elementsThatShouldEllipsis, function (element) {
+                    thellipsis(element, 3);
+                    // element.dispatchEvent(new Event("resize"));
                 });
-            }).resize();
+            }
+            window.dispatchEvent(new Event("resize"));
         });
     </script>
 </head>
 
 <body>
-    <!-- <p class="should-ellipsis" style="width: 50%;">The Hitch Hiker's Guide to the Galaxy has a few things to
+    <p class="thellipsis" style="width: 50%;">The Hitch Hiker's Guide to the Galaxy has a few things to
         say on the subject of towels. A towel, it says, is about the most massivelyuseful thing an interstellar hitch
         hiker can have. Partly it has great practical value - you can wrap it around you for warmth as you bound across
         the cold moons of Jaglan Beta; you can lie on it on the brilliant marble-sanded beaches of Santraginus V,
@@ -37,10 +39,10 @@
         hiker might accidentally have "lost". What the strag will think is that any man who can hitch the length and
         breadth of the galaxy, rough it, slum it, struggle against terrible odds, win through, and still knows where his
         towel is is clearly a man to be reckoned with.</p>
-    <p class="should-ellipsis" style="width: 50%;">Small text, less then one row. Without dottes.</p>
-    <p class="should-ellipsis" style="width: 50%;">2.5 lines example: A towel is about the most massively useful thing
+    <p class="thellipsis" style="width: 50%;">Small text, less then one row. Without dottes.</p>
+    <p class="thellipsis" style="width: 50%;">2.5 lines example: A towel is about the most massively useful thing
         an interstellar hitch hiker can have</p>
-    <p class="should-ellipsis" style="width: 50%;">The Hitch Hiker's Guide to the Galaxy has a few things to
+    <p class="thellipsis" style="width: 50%;">The Hitch Hiker's Guide to the Galaxy has a few things to
         say on the subject of towels. A towel, it says, is about the most massivelyuseful thing an interstellar hitch
         hiker can have. Partly it has great practical value - you can wrap it around you for warmth as you bound across
         the cold moons of Jaglan Beta; you can lie on it on the brilliant marble-sanded beaches of Santraginus V,
@@ -57,8 +59,8 @@
         hiker might accidentally have "lost". What the strag will think is that any man who can hitch the length and
         breadth of the galaxy, rough it, slum it, struggle against terrible odds, win through, and still knows where his
         towel is is clearly a man to be reckoned with.</p>
-    <p class="should-ellipsis" style="width: 50%;">Small text, less then one row. Without dottes.</p> -->
-    <p class="should-ellipsis" style="width: 50%;">2.5 lines example: A towel is about the most massively useful thing
+    <p class="thellipsis" style="width: 50%;">Small text, less then one row. Without dottes.</p>
+    <p class="thellipsis" style="width: 50%;">2.5 lines example: A towel is about the most massively useful thing
         an interstellar hitch hiker can have</p>
 </body>
 
