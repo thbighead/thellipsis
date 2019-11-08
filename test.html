@@ -12,8 +12,7 @@
 
             window.onresize = function () {
                 Array.prototype.forEach.call(elementsThatShouldEllipsis, function (element) {
-                    thellipsis(element, 3);
-                    // element.dispatchEvent(new Event("resize"));
+                    thellipsis(element, 3, true);
                 });
             }
             window.dispatchEvent(new Event("resize"));
@@ -38,8 +37,8 @@
         Furthermore, the strag will then happily lend the hitch hiker any of these or a dozen other items that the hitch
         hiker might accidentally have "lost". What the strag will think is that any man who can hitch the length and
         breadth of the galaxy, rough it, slum it, struggle against terrible odds, win through, and still knows where his
-        towel is is clearly a man to be reckoned with.</p>
-    <p class="thellipsis" style="width: 50%;">Small text, less then one row. Without dottes.</p>
+        towel is clearly a man to be reckoned with.</p>
+    <!-- <p class="thellipsis" style="width: 50%;">Small text, less then one row. Without dottes.</p>
     <p class="thellipsis" style="width: 50%;">2.5 lines example: A towel is about the most massively useful thing
         an interstellar hitch hiker can have</p>
     <p class="thellipsis" style="width: 50%;">The Hitch Hiker's Guide to the Galaxy has a few things to
@@ -58,10 +57,10 @@
         Furthermore, the strag will then happily lend the hitch hiker any of these or a dozen other items that the hitch
         hiker might accidentally have "lost". What the strag will think is that any man who can hitch the length and
         breadth of the galaxy, rough it, slum it, struggle against terrible odds, win through, and still knows where his
-        towel is is clearly a man to be reckoned with.</p>
+        towel is clearly a man to be reckoned with.</p>
     <p class="thellipsis" style="width: 50%;">Small text, less then one row. Without dottes.</p>
     <p class="thellipsis" style="width: 50%;">2.5 lines example: A towel is about the most massively useful thing
-        an interstellar hitch hiker can have</p>
+        an interstellar hitch hiker can have</p> -->
 </body>
 
 </html>
