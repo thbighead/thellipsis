@@ -122,3 +122,5 @@ function thellipsis(element, max_lines, debug) {
 
   element.innerHTML = lines.join(" ");
 }
+
+module.exports = thellipsis;

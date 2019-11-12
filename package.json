@@ -1,0 +1,28 @@
+{
+  "name": "thellipsis",
+  "version": "1.0.0",
+  "description": "A multiline text ellipsis solution made with Vanilla JS.",
+  "main": "src/thellipsis.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thbighead/thellipsis.git"
+  },
+  "keywords": [
+    "ellipsis",
+    "javascript",
+    "css",
+    "text",
+    "multiline",
+    "lines",
+    "responsive"
+  ],
+  "author": "Thales Nathan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thbighead/thellipsis/issues"
+  },
+  "homepage": "https://github.com/thbighead/thellipsis#readme"
+}
