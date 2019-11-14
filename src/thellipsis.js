@@ -16,7 +16,7 @@ function getContentWidth(pre_space, contentString, appendElement) {
 
   appendElement.appendChild(tempSpanElement);
 
-  const width = tempSpanElement.offsetWidth;
+  const width = tempSpanElement.getBoundingClientRect().width;
 
   appendElement.removeChild(tempSpanElement);
 
@@ -29,8 +29,11 @@ function debugging(on, values) {
     console.log("current_line: ", values.current_line);
     console.log("word: ", values.word);
     console.log("line_width: ", values.line_width);
-    console.log("width: ", values.width);
-    console.log("line_width >= width: ", values.line_width >= values.width);
+    console.log("width: ", values.element.getBoundingClientRect().width);
+    console.log(
+      "line_width >= width: ",
+      values.line_width >= values.element.getBoundingClientRect().width
+    );
     console.log("=====================");
   }
 }
@@ -86,10 +89,10 @@ function calculateLinesContentWordByWordToFitIntoWidth(
       line_width,
       current_line,
       word,
-      width: element.offsetWidth
+      element
     });
 
-    if (line_width >= element.offsetWidth) {
+    if (line_width >= element.getBoundingClientRect().width) {
       lines.push(current_line);
 
       line_width = getContentWidth(false, word, element); // new line
@@ -122,5 +125,3 @@ function thellipsis(element, max_lines, debug) {
 
   element.innerHTML = lines.join(" ");
 }
-
-module.exports = thellipsis;
