@@ -109,7 +109,7 @@ function calculateLinesContentWordByWordToFitIntoWidth(
   return lines;
 }
 
-function thellipsis(element, max_lines, debug) {
+export function thellipsis(element, max_lines, debug) {
   const text = getOriginalText(element);
   const lines = calculateLinesContentWordByWordToFitIntoWidth(
     text,
