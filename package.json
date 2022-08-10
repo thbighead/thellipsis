@@ -1,6 +1,7 @@
 {
   "name": "thellipsis",
-  "version": "1.0.2",
+  "type": "module",
+  "version": "1.0.3",
   "description": "A multiline text ellipsis solution made with Vanilla JS.",
   "main": "src/thellipsis.js",
   "scripts": {
